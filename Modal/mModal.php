@@ -15,7 +15,7 @@ class mModal
                             'success' => true,
                             'message' => 'Datos Producto obtenidos correctamente',
                             'datosProductos' => $this->getProductosB1($valor),
-                            'datosProductosAlmacen' => $resultAlmacen,                            
+                            'datosProductosAlmacen' => $resultAlmacen,
                             'status' => 200
                      ];
               } else {
@@ -43,7 +43,7 @@ class mModal
                            admProductos.CIDUNIDADBASE = admUnidadesMedidaPeso.CIDUNIDAD)
                            inner join admClasificacionesValores dbo_admClasificacionesValores ON
                            admProductos.CIDVALORCLASIFICACION1 = dbo_admClasificacionesValores.CIDVALORCLASIFICACION
-                           where admProductos.CCODIGOPRODUCTO = '$valor'
+                           where admProductos.CCODIGOPRODUCTO = '$valor' or admProductos.CCODALTERN ='$valor';
                            ";
 
               $query = $conexion->prepare($sql);
@@ -60,8 +60,8 @@ class mModal
                            admProductos.CIDUNIDADBASE = admUnidadesMedidaPeso.CIDUNIDAD)
                            inner join admClasificacionesValores dbo_admClasificacionesValores ON
                            admProductos.CIDVALORCLASIFICACION1 = dbo_admClasificacionesValores.CIDVALORCLASIFICACION
-                           where admProductos.CCODIGOPRODUCTO = '$valor';
-                           ;";
+                           where admProductos.CCODIGOPRODUCTO = '$valor' 
+                           or admProductos.CCODALTERN ='$valor';";
 
               $query = $conexion->prepare($sql);
               $query->execute();
@@ -77,6 +77,7 @@ class mModal
               select
               ap.CCOSTOESTANDAR as precio,
        aP.CCODIGOPRODUCTO as codigo,
+       aP.CCODALTERN as codigoProvedor,
        aP.CNOMBREPRODUCTO as NOMBRE,
        admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12 AS EXISTENCIA,
        CCONTROLEXISTENCIA-aP.CEXISTENCIANEGATIVA AS DIFERENCIA,
@@ -97,14 +98,20 @@ class mModal
        where
              (admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12) > 0
           and ap.CSTATUSPRODUCTO = 1 
-          and aP.CCODIGOPRODUCTO = '$valor'
+          and aP.CCODIGOPRODUCTO = '$valor'         
+           or aP.CCODALTERN ='$valor'
            and aA.CNOMBREALMACEN = '$almacen'
            and aE.CEJERCICIO = year(Getdate())
                     ";
 
+              //       var_dump($sql2);
+
               $queryAlmacen = $conexion->prepare($sql2);
               $queryAlmacen->execute();
-              return  $resultAlmacen = $queryAlmacen->fetchAll(PDO::FETCH_OBJ);
+              $resultAlmacen = $queryAlmacen->fetchAll(PDO::FETCH_OBJ);
+
+              // var_dump($resultAlmacen);
+              return  $resultAlmacen;
        }
 
 
@@ -118,6 +125,7 @@ class mModal
               select
               ap.CCOSTOESTANDAR as precio,
        aP.CCODIGOPRODUCTO as codigo,
+       aP.CCODALTERN as codigoProvedor,
        aP.CNOMBREPRODUCTO as NOMBRE,
        admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12 AS EXISTENCIA,
        CCONTROLEXISTENCIA-aP.CEXISTENCIANEGATIVA AS DIFERENCIA,
@@ -139,19 +147,21 @@ class mModal
              (admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12) > 0
           and ap.CSTATUSPRODUCTO = 1 
           and aP.CCODIGOPRODUCTO = '$valor'
+           or aP.CCODALTERN ='$valor'
            and aA.CNOMBREALMACEN = '$almacen'
            and aE.CEJERCICIO = year(Getdate())
                     ";
 
               $queryAlmacen = $conexion->prepare($sql2);
               $queryAlmacen->execute();
-              return  $resultAlmacen = $queryAlmacen->fetchAll(PDO::FETCH_OBJ);
+              $resultAlmacen = $queryAlmacen->fetchAll(PDO::FETCH_OBJ);
+              // var_dump($resultAlmacen);
+              return  $resultAlmacen ;
        }
 
 
        public function getAlmacen()
        {
-
               return   $array = [
                      'success' => true,
                      'message' => 'Datos Producto obtenidos correctamente',
