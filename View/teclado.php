@@ -188,14 +188,11 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                
                 document.getElementById('almacenProducto').innerHTML = productos.ALMACEN;
                 document.getElementById('existenciaProductoActual').innerHTML = productos.EXISTENCIA;
-                document.getElementById('sucursalXalapa').innerHTML = '$' + parseFloat(productos.sucursales_Xalapa).toFixed(
-                    2);
-                document.getElementById('sucursalVeracruz').innerHTML = '$' + parseFloat(productos.sucursales_veracruz)
-                    .toFixed(
-                        2);
+                document.getElementById('sucursalXalapa').innerHTML = '$' + iva(productos.sucursales_Xalapa);
+                document.getElementById('sucursalVeracruz').innerHTML = '$' +iva(productos.sucursales_veracruz);
                 // document.getElementById('mayoreoVeracruz').innerHTML = parseFloat(productos.sucursales_veracruz).toFixed(2);
-                document.getElementById('precioEspecial').innerHTML = '$' + parseFloat(productos.precio_especial).toFixed(
-                    2);
+                document.getElementById('precioEspecial').innerHTML = '$' + iva(productos.sucursales_veracruz);
+
 
 
 
@@ -214,8 +211,15 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
 
         function iva(Precio){
-            // console.log(Precio)
-            return Precio
+            //  console.log(Precio)
+            let M_iva = parseFloat(Precio).toFixed(2)*0.16
+            let TotalFinal = parseFloat(Precio) + parseFloat(M_iva)
+
+            // console.log('Presio:',parseFloat(Precio))
+            // console.log('iva:',M_iva)
+            // console.log('total:', parseFloat(Precio) + parseFloat(M_iva))
+            // return parseFloat(Precio) + parseFloat(M_iva).toFixed(2)
+            return TotalFinal.toFixed(2)
         }
     </script>
 </body>
