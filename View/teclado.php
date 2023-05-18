@@ -179,6 +179,8 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 // console.log("Contenido",imgProducto.src = imgAsignada,'Direccion',imgAsignada)
                 
 
+                console.log("precio con iva:",iva(productos.sucursales_Xalapa) );
+
                 console.log(productos);
                 imgProducto.src = imgAsignada
                 document.getElementById('titulo').innerHTML = data.CNOMBREPRODUCTO;
@@ -208,6 +210,12 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
 
 
+        }
+
+
+        function iva(Precio){
+            // console.log(Precio)
+            return Precio
         }
     </script>
 </body>
