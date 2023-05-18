@@ -101,7 +101,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
 
                                 <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4 text-center " style="display: none" id="contenido_img">
-                                    <img src="/assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto" class="p-1 img-fluid rounded-start img-contenido" alt="">
+                                    <img src="./assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto" class="p-1 img-fluid rounded-start img-contenido" alt="">
                                 </div>
 
 
@@ -175,7 +175,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 let data = jsonResponse.datosProductos[0];
                 let productos = jsonResponse.datosProductosAlmacen[0];
 
-                let imgAsignada = '/assets/img/'+data.CCODIGOPRODUCTO+'.png'
+                let imgAsignada = './assets/img/'+data.CCODIGOPRODUCTO+'.png'
                 // console.log("Contenido",imgProducto.src = imgAsignada,'Direccion',imgAsignada)
                 
 
