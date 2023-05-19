@@ -179,7 +179,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 // console.log("Contenido",imgProducto.src = imgAsignada,'Direccion',imgAsignada)
                 
 
-                console.log("precio con iva:",iva(productos.sucursales_Xalapa) );
+                // console.log("precio con iva:",iva(productos.sucursales_Xalapa) );
 
                 console.log(productos);
                 imgProducto.src = imgAsignada
