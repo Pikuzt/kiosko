@@ -105,7 +105,7 @@ class mModal
           where
               (
                   admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12
-              ) > 0
+              ) >= 0
               and aE.CEJERCICIO = year(Getdate())
               and aA.CNOMBREALMACEN = '$almacen'
               and ap.CSTATUSPRODUCTO = 1              
@@ -165,7 +165,7 @@ from
 where
     (
         admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12
-    ) > 0
+    ) >= 0
     and aE.CEJERCICIO = year(Getdate())
     and aA.CNOMBREALMACEN = '$almacen'
     and ap.CSTATUSPRODUCTO = 1
