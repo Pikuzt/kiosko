@@ -88,14 +88,14 @@
 
                                                   </div>
 
-                                                  <!-- <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4">
+                                                  <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4">
                                                             <a href="./camara.php" class="">
                                                                       <div class="pac-cadr-botton  mt-5 text-center center-block">
                                                                                 <div class="pac-text-title">Camara </div>
                                                                                 <img class="pac-img-card mt-5" src="./assets/img/lente.png" alt="">
                                                                       </div>
                                                             </a>
-                                                  </div> -->
+                                                  </div>
 
                                                   <!-- <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4">
                                                             <a href="./laser.php" class="">
