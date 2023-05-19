@@ -191,7 +191,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 document.getElementById('sucursalXalapa').innerHTML = '$' + iva(productos.sucursales_Xalapa);
                 document.getElementById('sucursalVeracruz').innerHTML = '$' +iva(productos.sucursales_veracruz);
                 // document.getElementById('mayoreoVeracruz').innerHTML = parseFloat(productos.sucursales_veracruz).toFixed(2);
-                document.getElementById('precioEspecial').innerHTML = '$' + iva(productos.sucursales_veracruz);
+                document.getElementById('precioEspecial').innerHTML = '$' + iva(productos.precio_especial);
 
 
 

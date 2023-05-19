@@ -441,8 +441,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
         let productos = jsonResponse.datosProductosAlmacen;
 
 
-        productos.forEach(producto => {
-
+          productos.forEach(producto => {
           console.log(parseFloat(producto.mayoreo_Veracruz).toFixed(2))
           // Crear un <tr>
           const $tr = document.createElement("tr");
