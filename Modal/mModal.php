@@ -9,6 +9,8 @@ class mModal
 
               $resultAlmacen = array_merge($this->getBusquedadB1($valor, $almacen), $this->getBusquedadB2($valor, $almacen));
               // var_dump($this->getBusquedadB1($valor, $almacen));
+              $dataAlmacener = array_merge($this->getAlmacenB1(), $this->getAlmacenB2());
+              //  var_dump($this->dataAlmacener($dataAlmacener, $resultAlmacen));
 
               if ($resultAlmacen) {
                      return $array = [
@@ -16,6 +18,7 @@ class mModal
                             'message' => 'Datos Producto obtenidos correctamente',
                             'datosProductos' => $this->getProductosB1($valor),
                             'datosProductosAlmacen' => $resultAlmacen,
+                            'tablaDatosAlmacen' => $this->dataAlmacener($dataAlmacener, $resultAlmacen),
                             'status' => 200
                      ];
               } else {
@@ -29,6 +32,49 @@ class mModal
               }
 
               // $datosDasededatos1 = $this->getBusquedadB1($valor, $almacen);
+       }
+
+
+       public function dataAlmacener($dataAlmacener, $resultAlmacen)
+       {
+              $array = array();
+              for ($i = 0; $i < count($dataAlmacener); $i++) {
+                     $val = $dataAlmacener[$i]->CNOMBREALMACEN;
+                     $arr_output = array_filter($resultAlmacen, function ($key) use ($val) {
+                            if ($key->ALMACEN == $val) {
+                                   return $key;
+                            }
+                     });
+
+                     $data = array_values($arr_output);
+
+                     if (count($arr_output) == 0) {
+                            array_push(
+                                   $array,
+                                   [
+                                          'almacen' => $val,
+                                          'disponibles' => 0,
+                                          'status' => 0,
+
+                                   ]
+                            );
+                     }
+
+                     if (count($arr_output) > 0) {
+                            array_push(
+                                   $array,
+                                   [
+                                          'almacen' => $data[0]->ALMACEN,
+                                          'disponibles' => $data[0]->EXISTENCIA,
+                                          'status' => $data[0]->activo,
+
+                                   ]
+                            );
+                     }
+
+              }
+
+              return $array;
        }
 
 
@@ -53,6 +99,7 @@ class mModal
 
        public function getProductosB2($valor)
        {
+
               $conexion = new DB();
               $conexion = $conexion->Base2();
               $sql = "
@@ -85,6 +132,7 @@ class mModal
               aP.CCODIGOPRODUCTO as codigo,
               aP.CCODALTERN as codigoProvedor,
               aP.CNOMBREPRODUCTO as NOMBRE,
+              ap.CSTATUSPRODUCTO as activo,
               admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12 AS EXISTENCIA,
               CCONTROLEXISTENCIA - aP.CEXISTENCIANEGATIVA AS DIFERENCIA,
               Aa.CNOMBREALMACEN AS ALMACEN,
@@ -102,13 +150,7 @@ class mModal
               inner join admProductos aP on admExistenciaCosto.CIDPRODUCTO = aP.CIDPRODUCTO
               inner join admAlmacenes aA on admExistenciaCosto.CIDALMACEN = aA.CIDALMACEN
               inner join admEjercicios aE on admExistenciaCosto.CIDEJERCICIO = aE.CIDEJERCICIO
-          where
-              (
-                  admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12
-              ) >= 0
-              and aE.CEJERCICIO = year(Getdate())
-              and aA.CNOMBREALMACEN = '$almacen'
-              and ap.CSTATUSPRODUCTO = 1              
+          where  aE.CEJERCICIO = year(Getdate())                  
                               
               ";
 
@@ -145,6 +187,7 @@ class mModal
     aP.CCODIGOPRODUCTO as codigo,
     aP.CCODALTERN as codigoProvedor,
     aP.CNOMBREPRODUCTO as NOMBRE,
+    ap.CSTATUSPRODUCTO as activo,
     admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12 AS EXISTENCIA,
     CCONTROLEXISTENCIA - aP.CEXISTENCIANEGATIVA AS DIFERENCIA,
     Aa.CNOMBREALMACEN AS ALMACEN,
@@ -162,32 +205,24 @@ from
     inner join admProductos aP on admExistenciaCosto.CIDPRODUCTO = aP.CIDPRODUCTO
     inner join admAlmacenes aA on admExistenciaCosto.CIDALMACEN = aA.CIDALMACEN
     inner join admEjercicios aE on admExistenciaCosto.CIDEJERCICIO = aE.CIDEJERCICIO
-where
-    (
-        admExistenciaCosto.CENTRADASPERIODO12 - admExistenciaCosto.CSALIDASPERIODO12
-    ) >= 0
-    and aE.CEJERCICIO = year(Getdate())
-    and aA.CNOMBREALMACEN = '$almacen'
-    and ap.CSTATUSPRODUCTO = 1
-          
-                    ";
+where aE.CEJERCICIO = year(Getdate())";
 
 
-                    $CCODIGOPRODUCTO = "and aP.CCODIGOPRODUCTO = '$valor'; ";
-                    $CCODALTERN = "and aP.CCODALTERN = '$valor' ;";
-                    if (is_numeric($valor)) {
-                           $query = $sql2 . $CCODALTERN;
-                    } else {
-                           $query = $sql2 . $CCODIGOPRODUCTO;
-                    }
+              $CCODIGOPRODUCTO = "and aP.CCODIGOPRODUCTO = '$valor'; ";
+              $CCODALTERN = "and aP.CCODALTERN = '$valor' ;";
+              if (is_numeric($valor)) {
+                     $query = $sql2 . $CCODALTERN;
+              } else {
+                     $query = $sql2 . $CCODIGOPRODUCTO;
+              }
 
-                     // var_dump($query);
+              // var_dump($query);
               // var_dump(is_numeric($valor));
 
               $queryAlmacen = $conexion->prepare($query);
               $queryAlmacen->execute();
               $resultAlmacen = $queryAlmacen->fetchAll(PDO::FETCH_OBJ);
-              // var_dump($sql2);
+              // var_dump($resultAlmacen);
               return $resultAlmacen;
        }
 
