@@ -42,7 +42,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                         <img class="pac-img-logo" src="./assets/img/logo2.png" width="200" height="100" alt="">
                     </div>
                     <div class="row  mt-5 p-2">
-                        <div class="col-12 ">
+                        <!-- <div class="col-12 ">
                             <small id="helpId2" class="form-text text-muted">Almacen</small>
                             <select class=" form-control form-control-sm custom-select mr-sm-2" id="almacen" aria-describedby="helpId2" onchange="ponleFocus()">
                                 <option value=""> Seleccion un opcion
@@ -57,28 +57,20 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
-                        </div>
-
-                        <div class="col-7 mt-3">
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <!-- <small id="helpId" class="form-text text-muted">Lector de codigo de barras</small> -->
-                                <div class="col-4  text-center p-4" id="resultado">
-
-                                    <p id="resultado"></p>
-                                    <div id="contenedor"></div>
-
-                                </div>
+                        </div> -->
+                        <div class="col-12" id="resultado_contenido_error" style="display:none">
+                            <div class="alert alert-success" role="alert">
+                                Producto no registrado
                             </div>
                         </div>
 
-                        <div class="col-12 mt-2">
-                            <hr>
-                        </div>
-
+                       
+                        <p  id="resultado"></p>
                         <div class="col-12" id="resultado_contenido">
                             <div class="row">
 
-                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-center" style="display: none" id="carga">
+                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-center"
+                                    style="display: none" id="carga">
                                     <strong>Loading...</strong>
                                     <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
                                 </div>
@@ -86,26 +78,72 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
 
 
-                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-left" style="display: none" id="contenido_producto">
+                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-left" style="display: none"
+                                    id="contenido_producto">
+
                                     <div class="col-12 text-center"><strong id="titulo"> Titulo </strong></div>
-                                    <div class="col-12 d-flex justify-content-around text-center align-items-center">
-                                        <div>Codigo: <br> <small class="text-muted" id="codigoResultado"></small></div>
-                                        <div>Almacen: <br> <small class="text-muted" id="almacenProducto"></small></div>
-                                        <div>Disponibles: <br> <small class="text-muted" id="existenciaProductoActual"></small>
-                                        </div>
+
+                                    <div class="col-12 text-center"> 
+                                    <div>Codigo: <br> <small class="text-muted" id="codigoResultado"></small></div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-around text-center align-items-center">
-                                        <div>Sucursales en Xalapa: <br> <small class="text-muted" id="sucursalXalapa"></small>
+                                        
+                                        <div>Sucursales en Xalapa: <br> <small class="text-muted"
+                                                id="sucursalXalapa"></small>
                                         </div>
-                                        <div>Sucursales en Veracruz: <br> <small class="text-muted" id="sucursalVeracruz"></small></div>
-                                        <div>Precio Especial: <br> <small class="text-muted" id="precioEspecial"></small>
+                                        <div>Sucursales en Veracruz: <br> <small class="text-muted"
+                                                id="sucursalVeracruz"></small></div>
+                                        <div>Precio Especial: <br> <small class="text-muted"
+                                                id="precioEspecial"></small>
                                         </div>
+                                        <hr>
                                     </div>
+
+                                    <style>
+                                        .scrodd {
+                                            height: 250px;
+                                            line-height: 1em;
+                                            overflow-x: hidden;
+                                            overflow-y: scroll;
+                                            width: 100%;
+                                            border: 1px solid;
+                                        }
+                                    </style>
+
+                                    <div class="col-12 d-flex justify-content-around text-center align-items-center">
+
+
+
+
+                                        <div class="col-12 text-center table-responsive scrodd">
+
+                                            <table class="table table-hover">
+
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Almacen</th>
+                                                        <th scope="col">Piezas</th>
+                                                        <th scope="col">Activo</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblDatos"></tbody>
+                                            </table>
+                                        </div>
+
+
+
+
+                                        <!-- <div>Almacen: <br> <small class="text-muted" id="almacenProducto"></small></div> -->
+
+                                    </div>
+
                                 </div>
 
 
-                                <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4 text-center" style="display: none" id="contenido_img">
-                                    <img src="/assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto" class="p-1 img-fluid rounded-start" alt="">
+                                <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4 text-center "
+                                    style="display: none" id="contenido_img">
+                                    <img src="./assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto"
+                                        class="p-1 img-fluid rounded-start img-contenido" alt="">
                                 </div>
 
 
@@ -118,6 +156,22 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                                 Producto no registrado
                             </div>
                         </div>
+                        <div class="col-12 mt-2">
+                            <hr>
+                        </div>
+                        <div class="col-12  text-center " id="contenedor"></div>
+                        <div class="col-12 mt-3">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <!-- <small id="helpId" class="form-text text-muted">Lector de codigo de barras</small> -->
+                                <div class="col-12  text-center " id="resultado">
+
+                                    <p  id="resultado"></p>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        
 
                     </div>
 
@@ -136,7 +190,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 inputStream: {
                     constraints: {
                         width: 400,
-                        height: 400,
+                        height: 300,
                     },
                     name: "Live",
                     type: "LiveStream",
@@ -226,7 +280,8 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 $resultados.textContent = data.codeResult.code;
                 // Imprimimos todo el data para que puedas depurar
                 //console.log(data);
-                let almacen = document.getElementById('almacen').value;
+                // let almacen = document.getElementById('almacen').value;
+                let almacen = 'muestra';
 
                 fetch('Controller/BusquedaController.php', {
                         method: 'POST',
@@ -235,7 +290,8 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            code: data.codeResult.code,
+                            // code: data.codeResult.code,
+                            code: '01bauinmb',
                             almacen: almacen
                         })
                     })
@@ -260,9 +316,13 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 document.getElementById('resultado_contenido_error').style.display = 'none';
                 let data = jsonResponse.datosProductos[0];
                 let productos = jsonResponse.datosProductosAlmacen[0];
+                let tabla = jsonResponse.tablaDatosAlmacen;
+
                 console.log(productos);
                 let imgAsignada = './assets/img/'+data.CCODIGOPRODUCTO+'.png'
                 imgProducto.src = imgAsignada
+
+
                 // console.log("Contenido",imgProducto.src = imgAsignada,'Direccion',imgAsignada)
                 
                 document.getElementById('titulo').innerHTML = data.CNOMBREPRODUCTO;
@@ -276,6 +336,37 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
 
 
+
+                console.log('datos de tabla', tabla)
+                const thead = document.querySelectorAll('tbody');
+                const filas = document.querySelectorAll('tbody > tr')
+                
+                var table3 = document.getElementById('tblDatos');
+                var rowCount = table3.rows.length;
+                console.log(rowCount);               
+
+                if (rowCount > 0) {                   
+
+                    for (i=0; i<tabla.length; i++){
+                        table3.deleteRow(0)
+                    }
+                }
+
+                for (let i = 0; i < tabla.length; i++) {
+                    let filaActual = document.getElementById('tblDatos').insertRow(i);
+                    for (let j = 0; j < 3; j++) {
+                        let celda = filaActual.insertCell(j);
+                        if (j == 0) {
+                            celda.innerHTML = tabla[i].almacen;
+                        }
+                        if (j == 1) {
+                            celda.innerHTML = tabla[i].disponibles;
+                        }
+                        if (j == 2) {
+                            celda.innerHTML = (tabla[i].status == 1) ? 'si' : 'no';
+                        }
+                    }   
+                }
 
                 // console.log('200');
 

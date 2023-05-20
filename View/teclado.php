@@ -91,11 +91,11 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
                                     <div class="col-12 text-center"><strong id="titulo"> Titulo </strong></div>
 
-                                    <div class="col-12 text-center"> 
-                                    <div>Codigo: <br> <small class="text-muted" id="codigoResultado"></small></div>
+                                    <div class="col-12 text-center">
+                                        <div>Codigo: <br> <small class="text-muted" id="codigoResultado"></small></div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-around text-center align-items-center">
-                                        
+
                                         <div>Sucursales en Xalapa: <br> <small class="text-muted"
                                                 id="sucursalXalapa"></small>
                                         </div>
@@ -225,7 +225,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 let productos = jsonResponse.datosProductosAlmacen[0];
                 let tabla = jsonResponse.tablaDatosAlmacen;
 
-                let imgAsignada = './assets/img/' + data.CCODIGOPRODUCTO + '.png'
+                let imgAsignada = './assets/img/' + productos.codigo + '.png'
                 // console.log("Contenido",imgProducto.src = imgAsignada,'Direccion',imgAsignada)
 
 
@@ -233,8 +233,8 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
                 console.log(productos);
                 imgProducto.src = imgAsignada
-                document.getElementById('titulo').innerHTML = data.CNOMBREPRODUCTO;
-                document.getElementById('codigoResultado').innerHTML = data.CCODIGOPRODUCTO;
+                document.getElementById('titulo').innerHTML = productos.NOMBRE;
+                document.getElementById('codigoResultado').innerHTML = productos.codigo;
 
                 // document.getElementById('almacenProducto').innerHTML = productos.ALMACEN;
                 // document.getElementById('existenciaProductoActual').innerHTML = productos.EXISTENCIA;
@@ -247,14 +247,14 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 console.log('datos de tabla', tabla)
                 const thead = document.querySelectorAll('tbody');
                 const filas = document.querySelectorAll('tbody > tr')
-                
+
                 var table3 = document.getElementById('tblDatos');
                 var rowCount = table3.rows.length;
-                console.log(rowCount);               
+                console.log(rowCount);
 
-                if (rowCount > 0) {                   
+                if (rowCount > 0) {
 
-                    for (i=0; i<tabla.length; i++){
+                    for (i = 0; i < tabla.length; i++) {
                         table3.deleteRow(0)
                     }
                 }

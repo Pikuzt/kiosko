@@ -110,6 +110,9 @@ class mModal
                            where admProductos.CCODIGOPRODUCTO = '$valor' 
                            or admProductos.CCODALTERN ='$valor';";
 
+
+                           
+
               $query = $conexion->prepare($sql);
               $query->execute();
               return $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -242,7 +245,7 @@ where aE.CEJERCICIO = year(Getdate())";
        {
               $conexion = new DB();
               $conexion = $conexion->conn();
-              $sql = " select CNOMBREALMACEN from admAlmacenes;";
+              $sql = " select CNOMBREALMACEN from admAlmacenes where CNOMBREALMACEN <> '(Ninguno)'  and    CNOMBREALMACEN <>  'Almacen de Mercancia en Consignacion';";
 
 
               $query = $conexion->prepare($sql);
@@ -254,7 +257,7 @@ where aE.CEJERCICIO = year(Getdate())";
        {
               $conexion = new DB();
               $conexion = $conexion->Base2();
-              $sql = " select CNOMBREALMACEN from admAlmacenes;";
+              $sql = " select CNOMBREALMACEN from admAlmacenes where CNOMBREALMACEN <> '(Ninguno)'  and    CNOMBREALMACEN <>  'Almacen de Mercancia en Consignacion';";
 
 
               $query = $conexion->prepare($sql);
