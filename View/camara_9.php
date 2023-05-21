@@ -30,6 +30,12 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
         border: 1px solid #ccc;
         border-radius: 10px;
     }
+
+    video {
+        max-width: 168%;
+        position: relative;
+        width: 97%;
+    }
 </style>
 
 <body>
@@ -64,13 +70,12 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                             </div>
                         </div>
 
-                       
-                        <p  id="resultado"></p>
+
+                        <p id="resultado"></p>
                         <div class="col-12" id="resultado_contenido">
                             <div class="row">
 
-                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-center"
-                                    style="display: none" id="carga">
+                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-center" style="display: none" id="carga">
                                     <strong>Loading...</strong>
                                     <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
                                 </div>
@@ -78,23 +83,19 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
 
 
-                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-left" style="display: none"
-                                    id="contenido_producto">
+                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-left" style="display: none" id="contenido_producto">
 
                                     <div class="col-12 text-center"><strong id="titulo"> Titulo </strong></div>
 
-                                    <div class="col-12 text-center"> 
-                                    <div>Codigo: <br> <small class="text-muted" id="codigoResultado"></small></div>
+                                    <div class="col-12 text-center">
+                                        <div>Codigo: <br> <small class="text-muted" id="codigoResultado"></small></div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-around text-center align-items-center">
-                                        
-                                        <div>Sucursales en Xalapa: <br> <small class="text-muted"
-                                                id="sucursalXalapa"></small>
+
+                                        <div>Sucursales en Xalapa: <br> <small class="text-muted" id="sucursalXalapa"></small>
                                         </div>
-                                        <div>Sucursales en Veracruz: <br> <small class="text-muted"
-                                                id="sucursalVeracruz"></small></div>
-                                        <div>Precio Especial: <br> <small class="text-muted"
-                                                id="precioEspecial"></small>
+                                        <div>Sucursales en Veracruz: <br> <small class="text-muted" id="sucursalVeracruz"></small></div>
+                                        <div>Precio Especial: <br> <small class="text-muted" id="precioEspecial"></small>
                                         </div>
                                         <hr>
                                     </div>
@@ -140,10 +141,8 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                                 </div>
 
 
-                                <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4 text-center "
-                                    style="display: none" id="contenido_img">
-                                    <img src="./assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto"
-                                        class="p-1 img-fluid rounded-start img-contenido" alt="">
+                                <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4 text-center " style="display: none" id="contenido_img">
+                                    <img src="./assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto" class="p-1 img-fluid rounded-start img-contenido" alt="">
                                 </div>
 
 
@@ -165,13 +164,13 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                                 <!-- <small id="helpId" class="form-text text-muted">Lector de codigo de barras</small> -->
                                 <div class="col-12  text-center " id="resultado">
 
-                                    <p  id="resultado"></p>
-                                    
+                                    <p id="resultado"></p>
+
 
                                 </div>
                             </div>
                         </div>
-                        
+
 
                     </div>
 
@@ -319,18 +318,18 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 let tabla = jsonResponse.tablaDatosAlmacen;
 
                 console.log(productos);
-                let imgAsignada = './assets/img/'+data.CCODIGOPRODUCTO+'.png'
+                let imgAsignada = './assets/img/' + data.CCODIGOPRODUCTO + '.png'
                 imgProducto.src = imgAsignada
 
 
                 // console.log("Contenido",imgProducto.src = imgAsignada,'Direccion',imgAsignada)
-                
+
                 document.getElementById('titulo').innerHTML = data.CNOMBREPRODUCTO;
                 document.getElementById('codigoResultado').innerHTML = data.CCODIGOPRODUCTO;
                 document.getElementById('almacenProducto').innerHTML = productos.ALMACEN;
                 document.getElementById('existenciaProductoActual').innerHTML = productos.EXISTENCIA;
                 document.getElementById('sucursalXalapa').innerHTML = '$' + iva(productos.sucursales_Xalapa);
-                document.getElementById('sucursalVeracruz').innerHTML = '$' +iva(productos.sucursales_veracruz);
+                document.getElementById('sucursalVeracruz').innerHTML = '$' + iva(productos.sucursales_veracruz);
                 // document.getElementById('mayoreoVeracruz').innerHTML = parseFloat(productos.sucursales_veracruz).toFixed(2);
                 document.getElementById('precioEspecial').innerHTML = '$' + iva(productos.precio_especial);
 
@@ -340,14 +339,14 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 console.log('datos de tabla', tabla)
                 const thead = document.querySelectorAll('tbody');
                 const filas = document.querySelectorAll('tbody > tr')
-                
+
                 var table3 = document.getElementById('tblDatos');
                 var rowCount = table3.rows.length;
-                console.log(rowCount);               
+                console.log(rowCount);
 
-                if (rowCount > 0) {                   
+                if (rowCount > 0) {
 
-                    for (i=0; i<tabla.length; i++){
+                    for (i = 0; i < tabla.length; i++) {
                         table3.deleteRow(0)
                     }
                 }
@@ -365,7 +364,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                         if (j == 2) {
                             celda.innerHTML = (tabla[i].status == 1) ? 'si' : 'no';
                         }
-                    }   
+                    }
                 }
 
                 // console.log('200');
@@ -386,9 +385,9 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
         }
 
-        function iva(Precio){
+        function iva(Precio) {
             //  console.log(Precio)
-            let M_iva = parseFloat(Precio).toFixed(2)*0.16
+            let M_iva = parseFloat(Precio).toFixed(2) * 0.16
             let TotalFinal = parseFloat(Precio) + parseFloat(M_iva)
 
             // console.log('Presio:',parseFloat(Precio))
