@@ -9,7 +9,8 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Document</title>
 </head>
@@ -44,10 +45,10 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                             <select class=" form-control form-control-sm custom-select mr-sm-2" id="almacen" aria-describedby="helpId2" required>
                                 <option value=""> Seleccion un opcion
                                 </option>
-                                <?php foreach ($dataAlmacen['datosAlmacen'] as $key => $value) : ?>
+                                <?php foreach ($dataAlmacen['datosAlmacen'] as $key => $value): ?>
 
-                                    <?php if (strcmp($value->CNOMBREALMACEN, '(Ninguno)                                                   ') === 0) : ?>
-                                    <?php else : ?>
+                                    <?php if (strcmp($value->CNOMBREALMACEN, '(Ninguno)                                                   ') === 0): ?>
+                                    <?php else: ?>
                                         <option value="<?php echo $value->CNOMBREALMACEN; ?>">
                                             <?php echo $value->CNOMBREALMACEN; ?>
                                         </option>
@@ -69,14 +70,13 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                             </div>
                         </div> -->
 
-                        <div class="col-12 mt-2">
-                            <hr>
-                        </div>
+
 
                         <div class="col-12" id="resultado_contenido">
                             <div class="row">
 
-                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-center" style="display: none" id="carga">
+                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-center"
+                                    style="display: none" id="carga">
                                     <strong>Loading...</strong>
                                     <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
                                 </div>
@@ -84,7 +84,8 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
 
 
 
-                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-left" style="display: none" id="contenido_producto">
+                                <div class="col-12 col-sm-12 col-xl-8 col-lg-8 col-md-8 text-left" style="display: none"
+                                    id="contenido_producto">
 
                                     <div class="col-12 text-center"><strong id="titulo"> Titulo </strong></div>
 
@@ -93,10 +94,13 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                                     </div>
                                     <div class="col-12 d-flex justify-content-around text-center align-items-center">
 
-                                        <div>Sucursales en Xalapa: <br> <small class="text-muted" id="sucursalXalapa"></small>
+                                        <div>Sucursales en Xalapa: <br> <small class="text-muted"
+                                                id="sucursalXalapa"></small>
                                         </div>
-                                        <div>Sucursales en Veracruz: <br> <small class="text-muted" id="sucursalVeracruz"></small></div>
-                                        <div>Precio Especial: <br> <small class="text-muted" id="precioEspecial"></small>
+                                        <div>Sucursales en Veracruz: <br> <small class="text-muted"
+                                                id="sucursalVeracruz"></small></div>
+                                        <div>Precio Especial: <br> <small class="text-muted"
+                                                id="precioEspecial"></small>
                                         </div>
                                         <hr>
                                     </div>
@@ -142,8 +146,10 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                                 </div>
 
 
-                                <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4 text-center " style="display: none" id="contenido_img">
-                                    <img src="./assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto" class="p-1 img-fluid rounded-start img-contenido" alt="">
+                                <div class="col-12 col-sm-12 col-xl-4 col-lg-4 col-md-4 text-center "
+                                    style="display: none" id="contenido_img">
+                                    <img src="./assets/img/01BAUMDIGBRAVIT.jpg" width="60%" height="auto"
+                                        class="p-1 img-fluid rounded-start img-contenido" alt="">
                                 </div>
 
 
@@ -155,10 +161,10 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                             </div>
                         </div>
                         <style>
-                        .drawingBuffer {
-                            width: 1px;
-    
-                          
+                            .drawingBuffer {
+                                width: 1px;
+
+
                             }
 
                             video {
@@ -166,13 +172,16 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                             }
                         </style>
 
+                        <div class="col-12 mt-2">
+                            <hr>
+                        </div>
                         <div class="col-12" id="resultado"></div>
                         <div class="col-12" id="camera"></div>
 
-                        
 
 
-                        
+
+
 
                     </div>
 
@@ -184,10 +193,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
     <script>
         Quagga.init({
             inputStream: {
-                constraints: {
-                        width: 300,
-                        height: 300,
-                    },
+
                 name: "Live",
                 type: "LiveStream",
                 target: document.querySelector('#camera') // Or '#yourElement' (optional)
@@ -205,7 +211,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                     "i2of5_reader"
                 ]
             }
-        }, function(err) {
+        }, function (err) {
             if (err) {
                 console.log(err);
                 return
@@ -214,7 +220,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
             Quagga.start();
         });
 
-        Quagga.onDetected(function(data) {
+        Quagga.onDetected(function (data) {
 
             let almacen = 'muestra';
             document.getElementById('carga').style.display = 'block';
@@ -222,16 +228,16 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
             document.getElementById('contenido_img').style.display = 'none';
 
             fetch('Controller/BusquedaController.php', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        code: data.codeResult.code,
-                        almacen: almacen
-                    })
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    code: data.codeResult.code,
+                    almacen: almacen
                 })
+            })
                 .then(response => response.json())
                 .then(datos)
                 .catch(error => console.log('error', error));
@@ -262,16 +268,16 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 document.getElementById('contenido_img').style.display = 'none';
 
                 fetch('Controller/BusquedaController.php', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            code: valor,
-                            almacen: almacen
-                        })
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        code: valor,
+                        almacen: almacen
                     })
+                })
                     .then(response => response.json())
                     .then(datos)
                     .catch(error => console.log('error', error));
