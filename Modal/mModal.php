@@ -147,7 +147,8 @@ class mModal
               round(aP.CPRECIO1, 2) as sucursales_Xalapa,
               round(aP.CPRECIO2, 2) as MAYOREO_XALAPA,
               round(aP.CPRECIO4, 2) as sucursales_veracruz,
-              round(aP.CPRECIO5, 2) as precio_especial
+              round(aP.CPRECIO5, 2) as precio_especial,
+              IIf (aP.CESEXENTO > 0, 0,1) as iva_incluido
           from
               admExistenciaCosto
               inner join admProductos aP on admExistenciaCosto.CIDPRODUCTO = aP.CIDPRODUCTO
@@ -202,7 +203,8 @@ class mModal
     round(aP.CPRECIO1, 2) as sucursales_Xalapa,
     round(aP.CPRECIO2, 2) as MAYOREO_XALAPA,
     round(aP.CPRECIO4, 2) as sucursales_veracruz,
-    round(aP.CPRECIO5, 2) as precio_especial
+    round(aP.CPRECIO5, 2) as precio_especial,
+    IIf (aP.CESEXENTO > 0, 0,1) as iva_incluido
 from
     admExistenciaCosto
     inner join admProductos aP on admExistenciaCosto.CIDPRODUCTO = aP.CIDPRODUCTO
