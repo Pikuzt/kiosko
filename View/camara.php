@@ -360,16 +360,25 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
         }
 
 
-        function iva(Precio) {
+        function iva(Precio, statusIva) {
             //  console.log(Precio)
-            let M_iva = parseFloat(Precio).toFixed(2) * 0.16
-            let TotalFinal = parseFloat(Precio) + parseFloat(M_iva)
+            if (statusIva == 1) {
+                let M_iva = parseFloat(Precio).toFixed(2) * 0.16
+                let TotalFinal = parseFloat(Precio) + parseFloat(M_iva)
+                console.log('iva:',TotalFinal.toFixed(2))
+                return TotalFinal.toFixed(2)
+            } else {
+                // let M_iva = parseFloat(Precio).toFixed(2) * 0.16
+                let TotalFinal = parseFloat(Precio).toFixed(2)
+                console.log('sin iva:',TotalFinal)
+                return TotalFinal
+            }
 
             // console.log('Presio:',parseFloat(Precio))
             // console.log('iva:',M_iva)
             // console.log('total:', parseFloat(Precio) + parseFloat(M_iva))
             // return parseFloat(Precio) + parseFloat(M_iva).toFixed(2)
-            return TotalFinal.toFixed(2)
+            
         }
     </script>
 </body>

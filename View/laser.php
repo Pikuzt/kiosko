@@ -228,7 +228,7 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
                 let productos = jsonResponse.datosProductosAlmacen[0];
                 let tabla = jsonResponse.tablaDatosAlmacen;
 
-                let imgAsignada = './assets/img/' + productos.codigo  + '.png'
+                let imgAsignada = './assets/img/' + productos.codigo + '.png'
                 // console.log(productos);
                 document.getElementById('titulo').innerHTML = productos.NOMBRE;
                 imgProducto.src = imgAsignada
@@ -281,20 +281,29 @@ require_once dirname(__FILE__) . '/../Controller/almacenes.php';
         }
 
         function ponleFocus() {
-            
-                document.getElementById("codigo").focus();
-                    }
 
-        function iva(Precio) {
+            document.getElementById("codigo").focus();
+        }
+
+        function iva(Precio, statusIva) {
             //  console.log(Precio)
-            let M_iva = parseFloat(Precio).toFixed(2) * 0.16
-            let TotalFinal = parseFloat(Precio) + parseFloat(M_iva)
+            if (statusIva == 1) {
+                let M_iva = parseFloat(Precio).toFixed(2) * 0.16
+                let TotalFinal = parseFloat(Precio) + parseFloat(M_iva)
+                console.log('iva:', TotalFinal.toFixed(2))
+                return TotalFinal.toFixed(2)
+            } else {
+                // let M_iva = parseFloat(Precio).toFixed(2) * 0.16
+                let TotalFinal = parseFloat(Precio).toFixed(2)
+                console.log('sin iva:', TotalFinal)
+                return TotalFinal
+            }
 
             // console.log('Presio:',parseFloat(Precio))
             // console.log('iva:',M_iva)
             // console.log('total:', parseFloat(Precio) + parseFloat(M_iva))
             // return parseFloat(Precio) + parseFloat(M_iva).toFixed(2)
-            return TotalFinal.toFixed(2)
+
         }
 
         ponleFocus()
