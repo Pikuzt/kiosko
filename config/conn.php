@@ -33,7 +33,7 @@ class DB
 
 
                     $dbh = new PDO(
-                              "sqlsrv:Server=25.1.139.89\CONTPAC; 
+                              "sqlsrv:Server=25.69.105.242\CONTPAC; 
                               Database=adSOLORO_SA_DE_CV",
                               $this->user,
                               $this->password,
@@ -58,7 +58,7 @@ class DB
 
 
                     $dbh = new PDO(
-                              "sqlsrv:Server=25.1.139.89\CONTPAC; 
+                              "sqlsrv:Server=25.69.105.242\CONTPAC; 
                               Database=adSOLORO_SA_DE_CV2021",
                               $this->user,
                               $this->password,
